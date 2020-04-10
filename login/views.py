@@ -45,7 +45,7 @@ def loginPage(request):
                 login(request,user)
                 return redirect('index.html')
             else:
-                message.info(request,'Username OR password is not matched')
+                messages.info(request,'Username OR password is not matched')
     context ={}
     return render(request,'login/login.html',context)
 def logoutUser(request):
