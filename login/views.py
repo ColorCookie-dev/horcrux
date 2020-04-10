@@ -11,11 +11,11 @@ from .forms import  CreateUserForm
 
 # Create your views here.
 def indexView(request):
-    return render(request,'index')
+    return render(request,'index.html')
 def dashboardView(request):
     return render(request,'dashboard.html')
 
-def registerView(request): 
+def registerView(request):
 	if request.user.is_authenticated:
 		return redirect('index.html')
 	else:
