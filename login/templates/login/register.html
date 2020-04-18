@@ -95,41 +95,56 @@
 
 				<div class="d-flex justify-content-center form_container">
 
-					<form method="POST" action="">
+					<form method="POST" action="{% url 'register_url' %}">
 
 						{% csrf_token %}
 
-						<div class="input-group mb-3">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
-							</div>
-							{{form.username}}
-						</div>
+						<table>
+							{{ form.as_table }}
+							<tr>
+								<td></td>
+								<td><input type="submit" name="submit" value="Register" /></td>
+							</tr>
+						</table>
 
-						<div class="input-group mb-2">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
-							</div>
-							{{form.email}}
-						</div>
+						<!--<div class="input-group mb-2">-->
+							<!--<div class="input-group-append">-->
+								<!--<span class="input-group-text"><i class="fas fa-user"></i></span>-->
+							<!--</div>-->
+							<!--{{form.username}}-->
+						<!--</div>-->
 
-						<div class="input-group mb-2">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
-							</div>
-							{{form.password1}}
-						</div>
+						<!--<div class="input-group mb-2">-->
+							<!--<div class="input-group-append">-->
+								<!--<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>-->
+							<!--</div>-->
+							<!--{{form.email}}-->
+						<!--</div>-->
 
-						<div class="input-group mb-2">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
-							</div>
-							{{form.password2}}
-						</div>
+						<!--<div class="input-group mb-2">-->
+							<!--<div class="input-group-append">-->
+								<!--<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>-->
+							<!--</div>-->
+							<!--{{form.org}}-->
+						<!--</div>-->
 
-				   		<div class="d-flex justify-content-center mt-3 login_container">
-				 			<input class="btn login_btn" type="submit" value="Register Account">
-				   		</div>
+						<!--<div class="input-group mb-2">-->
+							<!--<div class="input-group-append">-->
+								<!--<span class="input-group-text"><i class="fas fa-key"></i></span>-->
+							<!--</div>-->
+							<!--{{form.password1}}-->
+						<!--</div>-->
+
+						<!--<div class="input-group mb-2">-->
+							<!--<div class="input-group-append">-->
+								<!--<span class="input-group-text"><i class="fas fa-key"></i></span>-->
+							<!--</div>-->
+							<!--{{form.password2}}-->
+						<!--</div>-->
+
+						   <!--<div class="d-flex justify-content-center mt-3 login_container">-->
+							 <!--<input class="btn login_btn" type="submit" value="Register Account">-->
+						   <!--</div>-->
 
 					</form>
 				</div>
