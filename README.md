@@ -7,9 +7,20 @@ Django project for banks accounts management
 	pip install -r requirements.txt
 	```
 	
-  * To run the app, run  
+  * To migrate the models  
     ```
-	python manage.py runserver
+	python manage.py migrate --run-syncdb
 	```
+
+  * To create superuser
+    ```
+	python manage.py create_admin
+	```
+
+  * To run the server  
+    ```
+	python manage.py runserver  
+	```
+
   * Then go to localhost:8000/ url in the browser
 

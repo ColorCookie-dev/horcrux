@@ -46,10 +46,13 @@ class AccountManager(admin.ModelAdmin):
         if not request.user.is_superuser: obj.org = request.user.org
         if 'password' in form.changed_data:
             obj.set_password(form.cleaned_data.get('password'))
-            obj.save()
+        obj.save()
 
     def full_name(self, obj):
         return ("%s %s" % (obj.first_name, obj.last_name)).strip()
 
-admin.site.register(Org)
+@admin.register(Org)
+class OrgAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email',)
+    search_fields = ('name', 'email',)
 
