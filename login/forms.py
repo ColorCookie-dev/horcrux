@@ -6,15 +6,17 @@ from django.core.exceptions import ValidationError
 
 
 class CreateUserForm(forms.Form):
-    username = forms.CharField(label='Enter Username', min_length=4, max_length=150)
-
-    firstname = forms.CharField(label='Enter Firstname', min_length=4, max_length=150)
-    lastname = forms.CharField(label='Enter Lastname', min_length=4, required=False, max_length=150)
+    username = forms.CharField(label='Username', min_length=4, max_length=150)
+    firstname = forms.CharField(label='Firstname', min_length=4, max_length=150)
+    lastname = forms.CharField(label='Lastname', min_length=4, required=False, max_length=150)
+    email = forms.EmailField(label='email')
 
     org = forms.ModelChoiceField(queryset=Organisation.objects.all())
+    phone = forms.IntegerField(label='phone number')
+    postcode = forms.IntegerField(label='PostCode')
+    addr = forms.CharField(label='Address')
 
-    email = forms.EmailField(label='Enter email')
-    password1 = forms.CharField(label='Enter password', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
  
     def clean_username(self):
@@ -30,6 +32,12 @@ class CreateUserForm(forms.Form):
         if r.count():
             raise ValidationError("Email already exists")
         return email
+
+    def clean_postcode(self):
+        postcode = self.cleaned_data['postcode']
+        if len(str(postcode)) != 6:
+            raise ValidationError('Length of PostCode should be 6')
+        return postcode
  
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
@@ -48,5 +56,8 @@ class CreateUserForm(forms.Form):
             email=self.cleaned_data['email'],
             org=self.cleaned_data['org'],
             password=self.cleaned_data['password1'],
+            phone=self.cleaned_data['phone'],
+            postcode=self.cleaned_data['postcode'],
+            addr=self.cleaned_data['addr']
         )
         return user

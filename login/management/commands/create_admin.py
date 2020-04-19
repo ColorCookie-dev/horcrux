@@ -5,35 +5,47 @@ class Command(BaseCommand):
     help = 'This should only be run once. This creates an admin "Organisation" and makes an admin superuser to help initially access the django admin site located at "/admin/", The flags should be used otherwise default values will be used'
 
     def add_arguments(self, parser):
-        parser.add_argument('-u', '--username', type=str, help='Specifies the username')
-        parser.add_argument('-fn', '--firstname', type=str, help='Specifies the first_name')
-        parser.add_argument('-ln', '--lastname', type=str, help='Specifies the last_name')
-        parser.add_argument('-p', '--password', type=str, help='Specifies the password')
-        parser.add_argument('-e', '--email', type=str, help='Specifies the email to be used for both organisation and the admin user')
-        parser.add_argument('-o', '--org', type=str, help='Specifies the organisation name which will be present only for admin')
+        self.defvals = [
+                ('username', str, 'admin'),
+                ('firstname', str, 'admin'),
+                ('lastname', str, ''),
+                ('password', str, 'admin'),
+                ('org', str, 'admin'),
+                ('email', str, 'admin@admin.admin'),
+                ('VAT', int, 123),
+                ('CIN', int, 123),
+                ('postcode', int, 123),
+                ('addr', str, '123, This Street'),
+                ('website', str, 'example.com'),
+                ('phone', int, 123),]
+
+        for i in self.defvals:
+            parser.add_argument('--' + i[0], type=i[1], help='Specifies the ' + i[0])
+
         parser.add_argument('--default', action='store_true', help='sets default values')
 
     @no_translations
     def handle(self, *args, **options):
-
-        defvals = [('username', 'admin'),
-                ('firstname', 'admin'),
-                ('lastname', ''),
-                ('password', 'admin'),
-                ('org', 'admin'),
-                ('email', 'admin@admin.admin')]
-
         try:
-            for i in defvals:
+            for i in self.defvals:
                 if options[i[0]] == None:
                     if options['default']:
-                        options[i[0]] = i[1]
+                        options[i[0]] = i[2]
                     else:
-                        options[i[0]] = input(i[0] + ': ')
+                        options[i[0]] = i[1](input(i[0] + ': '))
 
             r = Org.objects.filter(name=options['org'])
             if not r.count(): 
-                admin_org = Org(name=options['org'], email=options['email'])
+                admin_org = Org(
+                        name=options['org'],
+                        email=options['email'],
+                        VAT=options['VAT'],
+                        CIN=options['CIN'],
+                        phone=options['phone'],
+                        website=options['website'],
+                        postcode=options['postcode'],
+                        addr=options['addr'],
+                    )
                 admin_org.save()
                 self.stdout.write(self.style.SUCCESS('Admin Organisation Created as: %s' % options['org']))
             else:
@@ -48,8 +60,11 @@ class Command(BaseCommand):
                         username=options['username'],
                         email=admin_org.email,
                         password=options['password'],
-                        org=admin_org
-                )
+                        org=admin_org,
+                        phone=options['phone'],
+                        postcode=options['postcode'],
+                        addr=options['addr'],
+                    )
                 self.stdout.write(self.style.SUCCESS('Superuser Created as: %s' % options['username']))
             else:
                 self.stderr.write(self.style.ERROR('Superuser already exists as: %s' % options['username']))

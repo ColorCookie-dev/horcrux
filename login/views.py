@@ -13,10 +13,6 @@ from .forms import  CreateUserForm
 def indexView(request):
     return render(request, 'index.html')
 
-@login_required(login_url='/login/')
-def dashboardView(request):
-    return render(request,'dashboard.html')
-
 def registerView(request): 
     if request.user.is_authenticated:
         return redirect('/')

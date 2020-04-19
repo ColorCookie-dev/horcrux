@@ -17,18 +17,26 @@ class AccountManager(admin.ModelAdmin):
         return ('org',)
 
     def get_list_display(self, request):
+        base_list = ('full_name', 'username', 'email', 'phone', 'addr', 'postcode', 'date_joined', 'is_active', 'last_login')
         if request.user.is_superuser:
-            return ('full_name', 'username', 'email', 'org', 'date_joined', 'is_active',)
-        return ('full_name', 'username', 'email', 'date_joined', 'is_active',)
+            return base_list + ('org',)
+        return base_list
 
     def get_fieldsets(self, request, obj=None):
         if request.user.is_superuser:
             return ((None, {
-                    'fields': ('username', 'password', ('first_name', 'last_name'),
-                       'email', 'org', 'user_permissions','is_active', 'is_staff')
+                    'fields': (
+                        'username', 'password',
+                        ('first_name', 'last_name'),
+                        'email', 'phone', 'addr', 'postcode', 'org',
+                        'user_permissions','is_active',
+                        'is_staff')
                 }),)
         return ((None, {
-                'fields': ('username', 'password', ('first_name', 'last_name'), 'email', 'is_active',)
+                'fields': (
+                    'username', 'password',
+                    ('first_name', 'last_name'),
+                    'email', 'phone', 'addr', 'postcode', 'is_active',)
             }),)
 
     search_fields = ('first_name', 'last_name', 'email',)
@@ -53,6 +61,6 @@ class AccountManager(admin.ModelAdmin):
 
 @admin.register(Org)
 class OrgAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email',)
+    list_display = ('name', 'email', 'VAT', 'phone', 'website', 'CIN', 'postcode', 'addr')
     search_fields = ('name', 'email',)
 
