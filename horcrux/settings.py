@@ -37,10 +37,17 @@ except ImportError:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 AUTH_USER_MODEL = 'login.User'
 STATIC_URL = '/static/'
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+SECURE_REFERRER_POLICY = 'same-origin'
+SECURE_HSTS_SECONDS = 518400
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
 # Application definition
@@ -54,6 +61,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+test_ssl_serv = False
+if test_ssl_serv:
+    INSTALLED_APPS.append('sslserver')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -17,7 +17,8 @@ Django project for Organisational account management
 	python manage.py runserver  
 	```
 
-  * Then go to localhost:8000/ url in the browser
+  * Then go to localhost:8000/ url in the browser  
+  * Don't forget to append the name of the website in the horcrux/settings.py file in the variable ALLOWED\_HOSTS
 
 ### Some Important files which should not be removed
 	db.sqlite3  
