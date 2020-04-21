@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <title>system login</title>
-</head>
-<body>
-    {% block content %}
-      <h1> welcome Home,from Homepage </h1>
-    {% endblock %}
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<h1>Welcome {{ user.username }}, from Homepage</h1>
+{% endblock %}

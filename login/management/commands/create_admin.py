@@ -10,7 +10,7 @@ class Command(BaseCommand):
                 ('firstname', str, 'admin'),
                 ('lastname', str, ''),
                 ('password', str, 'admin'),
-                ('org', str, 'admin'),
+                ('org', str, 'Example Org'),
                 ('email', str, 'admin@admin.admin'),
                 ('VAT', int, 123),
                 ('CIN', int, 123),
@@ -32,7 +32,10 @@ class Command(BaseCommand):
                     if options['default']:
                         options[i[0]] = i[2]
                     else:
-                        options[i[0]] = i[1](input(i[0] + ': '))
+                        if i[0] == 'org':
+                            options[i[0]] = i[1](input('Name of the Organisation: '))
+                        else:
+                            options[i[0]] = i[1](input(i[0] + ': '))
 
             r = Org.objects.filter(name=options['org'])
             if not r.count(): 

@@ -6,12 +6,22 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import  CreateUserForm
+from .models import User, Organisation as Org
 
+
+def get_comp_name():
+    return User.objects.get(is_superuser=True).org.name
+
+def get_def_context(request):
+    return {
+            'companyname': get_comp_name(),
+            }
 
 # Create your views here.
 @login_required(login_url='/login/')
 def indexView(request):
-    return render(request, 'index.html')
+    context = get_def_context(request)
+    return render(request, 'index.html', context)
 
 def registerView(request): 
     if request.user.is_authenticated:
@@ -25,7 +35,8 @@ def registerView(request):
             return redirect('/login/')
 
     form = CreateUserForm()
-    context = { 'form': form }
+    context = get_def_context(request)
+    context['form'] = form
     return render(request, 'login/register.html', context)
 
 def loginPage(request):
@@ -41,7 +52,7 @@ def loginPage(request):
             return redirect('/')
         else:
             messages.info(request, 'Username OR password is not matched')
-    context = {}
+    context = get_def_context(request)
     return render(request, 'login/login.html', context)
 
 @login_required(login_url='/login/')

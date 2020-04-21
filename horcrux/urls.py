@@ -15,6 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.db.utils import OperationalError
+from login.models import User
+
+
+try:
+    org_name = User.objects.get(is_superuser=True).org.name
+
+    admin.site.site_header = "%s Admin" % org_name
+    admin.site.site_title = "%s Admin Portal" % org_name
+    admin.site.index_title = "Welcome to %s Portal" % org_name
+except OperationalError:
+    pass
 
 urlpatterns = [
     path('admin/', admin.site.urls),
