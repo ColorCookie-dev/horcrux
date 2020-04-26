@@ -3,5 +3,12 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-<h1>Welcome {{ user.username }}, from Homepage</h1>
+<h1 class="dark-color">Welcome <span class="blue-color">{{ user.username }}</span>,</h1>
+
+{% if perms.login.view_user %}
+{% include 'employees.html' %}
+{% else %}
+<p>There is nothing for you right now.
+{% endif %}
+
 {% endblock %}

@@ -9,6 +9,13 @@ from .forms import  CreateUserForm
 from .models import User, Organisation as Org
 
 
+def logged_out_required(view_func):
+    def wrapper(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('/')
+        return view_func(request, *args, **kwargs)
+    return wrapper
+
 def get_comp_name():
     return User.objects.get(is_superuser=True).org.name
 
@@ -21,11 +28,17 @@ def get_def_context(request):
 @login_required(login_url='/login/')
 def indexView(request):
     context = get_def_context(request)
+    if request.user.has_perm('login.view_user'):
+        if not request.user.is_superuser:
+            user_org = request.user.org
+            context['members'] = User.objects.filter(org=user_org)
+        else:
+            context['members'] = User.objects.all()
+
     return render(request, 'index.html', context)
 
+@logged_out_required
 def registerView(request): 
-    if request.user.is_authenticated:
-        return redirect('/')
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
@@ -39,9 +52,8 @@ def registerView(request):
     context['form'] = form
     return render(request, 'login/register.html', context)
 
+@logged_out_required
 def loginPage(request):
-    if request.user.is_authenticated:
-        return redirect('/')
     if request.method == 'POST':
         username=request.POST.get('username')
         password=request.POST.get('password')

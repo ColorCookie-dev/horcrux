@@ -37,7 +37,7 @@ except ImportError:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 AUTH_USER_MODEL = 'login.User'
 STATIC_URL = '/static/'
@@ -48,6 +48,7 @@ SECURE_REFERRER_POLICY = 'same-origin'
 SECURE_HSTS_SECONDS = 518400
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+test_ssl_serv = False
 
 
 # Application definition
@@ -62,7 +63,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-test_ssl_serv = False
 if test_ssl_serv:
     INSTALLED_APPS.append('sslserver')
 

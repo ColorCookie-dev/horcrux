@@ -1,0 +1,53 @@
+<div>
+<hr>
+ <div class="row">
+	<div class="col-md-8">
+		<h5>EMPLOYEES</h5><hr>
+		<div class="card card-body">
+			<table class="table emp-table table-info">
+				<tr>
+					<th>Employee Name</th>
+					<th>Department</th>
+					<th>Phone</th>
+				</tr>
+					
+				{% for member in members %}
+				<tr>
+					<td>
+					{% if perms.login.change_user %}
+					<a class="emp-link" href="/admin/login/user/{{ member.id }}/change/">
+					{% endif %}
+						{{ member.first_name }}
+					{% if perms.login.change_user %}
+					</a>
+					{% endif %}
+					</td>
+					<td>{{ member.org }}</td>
+					<td>{{ member.phone }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+		<div class="col-md-3">
+			<div class="card card-body">
+				{% if perms.login.add_group %}
+				<a class="btn btn-primary btn-sm btn-block" href="admin/auth/group/add/">CREATE GROUP</a>
+				<hr>
+				{% endif %}
+
+				{% if perms.login.add_organisation %}
+					<a class="btn btn-primary btn-sm btn-block bg-cyan" href="admin/login/organisation/add/">CREATE DEPARTMENT</a>
+				<hr>
+				{% endif %}
+
+				{% if perms.login.add_user %}
+				<a class="btn btn-primary btn-sm btn-block" href="admin/login/user/add/">CREATE USER</a>
+				<hr>
+				{% endif %}
+				<td><a class="btn btn-primary btn-block btn-sm" href="admin/login/user/">View User Details</a></td>
+		</div>
+</div>
+</div>
+<br>
+<hr>

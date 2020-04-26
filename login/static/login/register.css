@@ -1,15 +1,8 @@
-body, html {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	background: #7abecc;
-}
-
 .user_card {
-	color: #2f2f2f;
+	color: #b3b6b7;
 	margin-top: auto;
 	margin-bottom: auto;
-	background: #74cfbf;
+	background: #17202a;
 	padding: 100px, 0px, 100px, 0px;
 
 	position: absolute;
@@ -36,34 +29,19 @@ body, html {
 	color: #fff;
 }
 
-.login_btn {
-	width: 100%;
-	background: #33ccff;
-	color: white;
-}
-
-.login_btn:focus {
-	box-shadow: none;
-	outline: 0px;
-}
-
-.login_container {
-	padding: 0 2rem;
-}
-
-.input-group-text {
-	background: #f7ba5b;
-	color: white;
-	border: 0;
-	border-radius: 0.25rem 0 0 0.25rem;
-}
-
 #reg_btn {
-	background-color: limegreen;
+	color: #f1f1f1;
+	background-color: #ff4444;
 	border: none;
 	width: 150px;
 	height: 40px;
 	border-radius: 5px;
 	float: right;
+}
+
+#reg_btn:hover {
+	background-color: limegreen;
+	box-shadow: none;
+	outline: 0px;
 }
 

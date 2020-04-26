@@ -1,16 +1,29 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	background: #7abecc;
+	background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+}
+
+p {
+  font-size: 25px;
+}
+
 .main-cont {
+	color: #ffffff;
 	padding: 10px 20px;
 }
 
 .header {
   overflow: hidden;
-  background-color: #f1f1f1;
+  background: #17202a;
   padding: 20px 10px;
 }
 
 .header a {
   float: left;
-  color: black;
+  color: whitesmoke;
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -47,4 +60,36 @@
   .header-right {
     float: none;
   }
+}
+
+.card {
+  background: #17202a;
+}
+
+.dark-color {
+  color: #17202a;
+}
+
+.light-color {
+  color: whitesmoke;
+}
+
+.blue-color {
+  color: dodgerblue;
+}
+
+.emp-table {
+  background: dodgerblue;
+  border-radius: 5px;
+  margin: 0px;
+}
+
+.emp-link {
+  text-decoration: bold;
+  color: whitesmoke;
+}
+
+.emp-link:hover {
+  color: mediumvioletred;
+  text-decoration: none;
 }
