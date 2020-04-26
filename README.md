@@ -16,6 +16,7 @@ Django project for Organisational account management
     ```
 	python manage.py runserver  
 	```
+	* Docs for setting up ssl server: [WSGI/Gunicorn](https://docs.djangoproject.com/en/3.0/howto/deployment/wsgi/gunicorn/)
 
   * Now the server should be running visit the site from a browser  
   * Don't forget to append the name of the website in the horcrux/settings.py file in the variable ```ALLOWED_HOSTS```
