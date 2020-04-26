@@ -40,7 +40,7 @@ Django project for Organisational account management
 	python manage.py runsslserver
 	```
   
-  * Go to the site with a modern browser, and don't forget to add the name of the site to the list variable ```ALLOWED_HOSTS``` in the settings.py file. (```localhost``` and ``127.0.0.1``` is already present)
+  * Go to the site with a modern browser, and don't forget to add the name of the site to the list variable ```ALLOWED_HOSTS``` in the settings.py file. (```localhost``` and ```127.0.0.1``` is already present)
 
 ### Some Important files which should not be removed
 	db.sqlite3  
