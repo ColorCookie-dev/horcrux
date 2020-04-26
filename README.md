@@ -46,4 +46,4 @@ Django project for Organisational account management
 	db.sqlite3  
 	files in "migrations" folder  
 	secret_key.py  
-	All of these files will be created automatically when the ```first_run``` command is run. Do NOT delete them as it will lead to data loss.
+	All of these files will be created automatically when the first_run command is run. Do NOT delete them as it will lead to data loss.
