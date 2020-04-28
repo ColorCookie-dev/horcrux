@@ -20,7 +20,7 @@ from login.models import User
 
 
 try:
-    org_name = User.objects.get(is_superuser=True).org.name
+    org_name = User.objects.filter(is_superuser=True)[0].org.name
 
     admin.site.site_header = "%s Admin" % org_name
     admin.site.site_title = "%s Admin Portal" % org_name
