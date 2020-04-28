@@ -17,7 +17,7 @@ def logged_out_required(view_func):
     return wrapper
 
 def get_comp_name():
-    return User.objects.get(is_superuser=True).org.name
+    return User.objects.filter(is_superuser=True)[0].org.name
 
 def get_def_context(request):
     return {

@@ -48,7 +48,7 @@ SECURE_REFERRER_POLICY = 'same-origin'
 SECURE_HSTS_SECONDS = 518400
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-test_ssl_serv = False
+test_ssl_serv = True
 
 
 # Application definition

@@ -6,10 +6,12 @@ from django.forms import ModelForm
 # Register your models here.
 @admin.register(User)
 class AccountManager(admin.ModelAdmin):
+    filter_horizontal = ('user_permissions', 'groups')
+
     def get_list_filter(self, request):
         if request.user.is_superuser:
-            return ('is_active', 'is_staff', 'org', 'date_joined',)
-        return ('is_active', 'date_joined', 'is_staff')
+            return ('is_active', 'is_staff', 'org', 'date_joined', 'groups')
+        return ('is_active', 'date_joined', 'is_staff', 'groups')
 
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_superuser:
@@ -29,7 +31,7 @@ class AccountManager(admin.ModelAdmin):
                         'username', 'password',
                         ('first_name', 'last_name'),
                         'email', 'phone', 'addr', 'postcode', 'org',
-                        'user_permissions','is_active',
+                        'groups', 'user_permissions', 'is_active',
                         'is_staff')
                 }),)
         return ((None, {
@@ -57,7 +59,8 @@ class AccountManager(admin.ModelAdmin):
         obj.save()
 
     def full_name(self, obj):
-        return ("%s %s" % (obj.first_name, obj.last_name)).strip()
+        name = ("%s %s" % (obj.first_name, obj.last_name)).strip()
+        return name if name else '--empty--'
 
 @admin.register(Org)
 class OrgAdmin(admin.ModelAdmin):
